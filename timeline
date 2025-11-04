@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scroll Text and Image Animation</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background-color: #f8f8f8;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 200vh; /* enough height to scroll */
+      overflow-x: hidden;
+    }
+
+    .text-column {
+      padding: 100px 60px;
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
+
+    .text-block {
+      margin-bottom: 100vh; /* space to create scroll */
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease-out;
+    }
+
+    .text-block.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .image-column {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+# image animation 
+
+    .image-column img {
+      position: absolute;
+      width: 80%;
+      max-width: 500px;
+      right: -100%;
+      opacity: 0;
+      transition: all 1.2s ease-out;
+    }
+
+    .image-column img.visible {
+      right: 10%;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="text-column">
+      <div class="text-block">
+        <h2>Welcome to Our Story</h2>
+        <p>As you scroll, the story unfolds on the left while the image slides in from the right.</p>
+      </div>
+      <div class="text-block">
+        <h2>Beautiful Landscapes</h2>
+        <p>Explore how visuals can enhance storytelling in your ArcGIS StoryMap projects.</p>
+      </div>
+      <div class="text-block">
+        <h2>Dynamic Experiences</h2>
+        <p>Scroll-triggered animations create engaging, modern storytelling experiences.</p>
+      </div>
+    </div>
+
+    <div class="image-column">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Lake_mapourika_NZ.jpeg/800px-Lake_mapourika_NZ.jpeg" alt="Landscape Image" id="scrollImage" />
+    </div>
+  </div>
+
+  <script>
+    // Observe text blocks and reveal them on scroll
+    const blocks = document.querySelectorAll('.text-block');
+    const image = document.getElementById('scrollImage');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          image.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.4 });
+
+    blocks.forEach(block => observer.observe(block));
+  </script>
+</body>
+</html>
