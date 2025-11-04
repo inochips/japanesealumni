@@ -1,0 +1,7 @@
+# To customize
+#| What you want          | How to do it                                                                  |
+#| ---------------------- | ----------------------------------------------------------------------------- |
+#| Use a different image  | Replace the URL in the `<img>` tag                                            |
+#| Speed up/slow down pan | Change `maxPan` calculation or multiply `progress` by a smaller/larger number |
+#| Reverse direction      | Change `translateX(${offset}px)` to `translateX(${-offset}px)`                |
+#| Adjust column widths   | Modify `grid-template-columns: 45% 55%;`                                      |
